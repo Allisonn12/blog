@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+{% form_theme commentForm 'bootstrap_4_layout.html.twig' %}
+{% block title %}Show Posts{% endblock %}
+
+
+{% block body %}
+<style>
+        .post{
+            border-radius: 10px;
+            box-shadow: 0 16px 40px #ccc;
+            /*margin-bottom:40px;
+            margin-top: 50px;*/
+            margin: 50px 0;
+            padding: 20px;
+        }
+        img{
+            border-radius: 10px;
+        }
+    </style>
+<section class="post">
+
+        <article>
+            <h2>{{ post.title }}</h2>
+            <div class="metadata">
+                {{post.createdAt | date('Y-m-d')}} at {{post.createdAt | date('H:i')}} By Hlabi
+                <span class="badge bg-success">Sports</span>
+                5 Comments
+            </div>
+            <div class="contents">
+                <img src="https://picsum.photos/seed/picsum/400/200" alt="Hlabi" class="mt-3 mb-3">
+                <p>
+                    To request multiple images of the same size in your browser, 
+                    add the random query param to prevent the images from 
+                    being cached:
+                </p>
+                <a href="#" class="btn btn-outline-success">Read more...</a>
+            </div>
+        </article>
+
+    </section>
+    <h2 class="mt-5">5 comments</h2>
+{#    <section class="mt-5">#}
+{#        {% for comment in post.comments %}#}
+{#        <div class="card-header">#}
+{#            {{ comment.author }} <small>{{comment.createdAt | date('Y-m-d')}} at {{comment.createdAt | date('H:i')}}</small>#}
+{#        </div>#}
+{#        <div class="card-body">#}
+{#            <p>#}
+{#                {{ comment.content }}#}
+{#            </p>#}
+{#        </div>#}
+{#        {% endfor %}#}
+{#    </section>#}
+
+    <hr>
+
+    <h2>Add comments</h2>
+
+    {{ form_start(commentForm) }}
+    {{ form_widget(commentForm) }}
+    <button class="btn btn-success mt-3">Add</button>
+
+    {{ form_end(commentForm) }}
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home Page{% endblock %}
+
+{% block body %}
+    <style>
+        .posts{
+            border-radius: 10px;
+            box-shadow: 0 16px 40px #ccc;
+            /*margin-bottom:40px;
+            margin-top: 50px;*/
+            margin: 50px 0;
+            padding: 20px;
+        }
+        .title a{
+            font-size: 3vw;
+            text-transform: capitalize;
+        }
+        img{
+            border-radius: 10px;
+        }
+        .flash-success{
+            text-align: center;
+            font-size: large;
+            font-weight: 900;
+        }
+    </style>
+    {%for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for post in posts %}
+        <section class="posts">
+
+        <article>
+            <div class="title">
+                <a href="{{ path('post_show', {'id': post.id}) }}">{{post.title}}</a>
+            </div>
+            <div class="metadata">
+                {{post.createdAt | date('Y-m-d')}} at {{post.createdAt | date('H:i')}} By Allison Masemola
+                <span class="badge bg-success">News</span>
+{#                <span class="badge bg-success">{{ post.category.title }}</span>#}
+
+                5 Comments
+            </div>
+            <div class="contents">
+                <img src="https://picsum.photos/seed/picsum/400/200" alt="Hlabi" class="mt-3 mb-3">
+                <p>
+                    {{post.content}}
+                </p>
+{#                <a href="#" class="btn btn-outline-success">Read more...</a>#}
+            </div>
+        </article>
+
+    </section>
+    {% endfor %}
+    <div class="navigation mt-5">
+        {{ knp_pagination_render(posts) }}
+    </div>
+
+
+
+
+{% endblock %} 
